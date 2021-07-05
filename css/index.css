@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'NotoSansKR';
+    font-style: normal;
+    font-weight: 300;
+    src: url('NotoSansKR-Light.eot'); 
+    src: local('Noto Sans CJK kr Light'),
+       local('NotoSansKR-Light'),
+       url(../fonts/NotoSansKR-Light.eot?#iefix) format('embedded-opentype'),
+       url(../fonts/NotoSansKR-Light.woff2) format('woff2'),
+       url(../fonts/NotoSansKR-Light.woff) format('woff'),
+       url(../fonts/NotoSansKR-Light.ttf) format('truetype');
+ }
+
+ @font-face {
+    font-family: 'NotoSansKR';
+    font-style: normal;
+    font-weight: 500;
+    src: url('NotoSansKR-Medium.eot'); 
+    src: local('Noto Sans CJK kr Medium'),
+       local('NotoSansKR-Medium'),
+       url(../fonts/NotoSansKR-Medium.eot?#iefix) format('embedded-opentype'),
+       url(../fonts/NotoSansKR-Medium.woff2) format('woff2'),
+       url(../fonts/NotoSansKR-Medium.woff) format('woff'),
+       url(../fonts/NotoSansKR-Medium.ttf) format('truetype');
+ }
+
+body {min-width: 1280px;  font-family: 'NotoSansKR';}
+
+header { height: 81px; text-align: center; position: relative;} /*position: relative;주는 이유는 창을 줄이면 맨끝에 있는 메뉴들이 뭉개짐. 그래서 header에 reletive를 주지않으면 body를 기준이라 뭉개짐! */
+header h1 {position: absolute; left: 50px; top: 0; padding:14px 0 0;} /*왼쪽에 붙도록 처리*/
+header .spot { position: absolute; right: 50px; top: 0;} /*오른쪽에 붙도록 처리*/
+header h1 a {display:block; width: 110px; height: 48px; color: transparent; background: url(../images/sp_com.png) no-repeat -300px 0;} /*한솔홈데코 로고 사진 크기 . 왜 a에다가 줘야하냐? 그것은 사람들이 로고 그림을 클릭하기때문임*. 글씨를 딱 맞춰서 클릭하진 않기때문! 따라서 a요소가 클릭될수있도록 줘야함! 또한 a요소는 인라인 요소이기때문에 가로세로가 안들어감 .블록요소로 바꾸어 가로세로가 들어갈수있도록! ,텍스트가 필요없기때문에 color: transparent;줘서 글씨는 투명 -300px 0은 이미지 좌표찍어주고 width랑 height로 이미지 잘라서 붙여줌*/
+header h2 {position: absolute; left: -9999px;} /*position:none으로 하면 안됨. 리더기가 읽어주지 않기때문에 absolute,left:-9999px로 저 멀리 보내버려 안보이게 만들어줌! 이때left든 top이든 상관 x , 이 내용을 넣어 hide클래스를 만들어놓음*/
+header .lnb li {display: inline-block; }  /*대메뉴들을 나열! float: left;옆으로 다 붙음 실제론 가운데 정렬이 되어야하는데 float은 text-align:center가 먹히지 않음 . 따라서 , 여기서 float:left (x) 블록요소를 옆으로 붙이기위해서 inline-block사용해야함 인라인속성도 들어있기때문에 center가 적용됨!*/
+/*알아두어야할점! inline-block의 단점은 코드상으로 줄내림을 하게되면 스페이스한칸이 생겨 여백이 생김 이는 css상으로 보완가능함. */
+header .lnb li a span { position: relative;} /*after의 부모인 span을 기준으로 잡아야 글씨만큼의 크기를 가진 밑줄을 만들수있음! a요소는 이미 크기를 크게 줘서 변형을 줄수없기때문*/
+header .lnb li a:hover { color: #2d5b79; font-weight: bold; }
+header .lnb li a:hover span:after { position: absolute; left: 0; content: ""; display: block; width: 100%; height: 1px; background: #2d5b79; bottom: -9px;}
+header .lnb li a { display: block; height: 81px; padding:0 31px; font-size: 17px; color: #333;
+line-height: 81px;} /*클릭하기 쉽도록 a태그에 주어야함! 메뉴 높이는 81px, 좌우여백 31px 글씨색은 가장 진한부분 스포이드사용! 높이만큼 줄간격(line-height를 주면 텍스트 한줄은 가운데로 옴( y축 가운데로! )*/
+header .spot li {position: relative; float:left;} /* float:left ->컬럼형태로 일자 정렬됨, 메뉴사이에 |를 넣기위해서는 일단 position이 reletive가 되어야함!*/
+header .spot li:after { content:""; position: absolute; left: 0; top:50%; width: 1px; height: 7px;
+background: #ccc; transform: translateY(-50%);} /* "|"넣기 :li뒤에 content를 만들고 포지션을 줘서 위로 올리고! 살짝 밑으로 내려가있는데 transform: translateY(-50%);로 위로 50%올림!*/
+header .spot li a { display: block; height: 81px; padding: 0 9px 0; line-height: 81px;} /*마찬가지로 편하게 누르는 효용성을 높이기위해 a태그에다 기능을 넣어줄건데 높이는 81px이고, 좌우 9px여백으로 조금 띄워주기. 높이만큼 줄간격을 주게되면 첫줄은 가운데 정렬됨!*/
+header .spot li:last-child a {padding-right: 0;} /*메뉴 마지막 여백은 빼주기! header .spot에 오른쪽 여백을 50으로 줬는데 padding으로 10px씩 떨어뜨려놔서 맨 끝은 50px이 안되었으므로 a링크의 맨오른쪽여백을 제거해줌!*/
+header .spot li:first-child:after{ display: none;} /*헷갈주의!! after를 없내기위해 첫번째를 선택하여 첫번째의 뒤에 있는것이지 after first-child하면 뒤에있는 첫번째 요소를 찾게되므로 (x)*/
+header .spot li a span{ position: relative;}
+header .spot li a:hover span:after { content: ""; position: absolute; left: 0; bottom: -2px; display: block; width: 100%; height: 1px; background: #2d5b79; }
+
+/*비주얼 영역*/
+.visual { position: relative; padding: 0 50px;} /*이전,다음,시작,일시정지가 사진안으로 자리잡으려면 부모영역인 visual이 기준이 되어 absolute가 되어야함*/
+.slide .prev,
+.slide .next { display: block; position: absolute; top:50%; width: 25px; height: 47px; 
+    background: url(../images/sp_com.png); transform: translateY(-50%);  color: transparent;  } /*공통부분 처리! 1. 가로세로가 들어감으로 인라인이 아닌 블록요소! 2. 포지션으로 top에서 50% 띄워짐 3.이때, 자기의 반만큼! transfrom: translate Y축으로 반만큼올라가!(-50%) 4.배경이미지가 같고 다른 좌표를 사용하는것이므로 이미지는 같음!*/
+.slide .prev { left: 82px; background-position: -128px -60px;} /*이미지 좌표는 background-posiion으로 잡아야함*/
+.slide .next { right: 82px; background-position: -158px -60px;}
+
+.slide .control {position:absolute; bottom:55px; left: 0; width: 100%; text-align: center; }
+.slide .control > div {display: inline-block; position: relative; padding:0 45px 0 0; } /*inline-block을 하는 이유는 전체적으로 가운데 정렬을 하기위해서*/
+.slide .control > div > div { position: absolute; right:0;}
+.slide .control > div > div a { opacity: 0.5; background: url(../images/sp_com.png); margin: 0 0 0 7px;  overflow: hidden; display: inline-block; width: 8px; height: 9px;} /*텍스트가 있어서 삐뚤어짐.텍스트가 박스크기보다 커서 옆으로 나가지 못하면 한단계 밑으로 떨어지기때문에 삐뚤게보이는것임. 가로세로가 있으면 overflow:hidden이 제공!(이걸하면 텍스트가 빠져나가지않고 넘치는것을 숨겨줌*/
+.slide .control > div > div a.on {opacity: 1;}
+.slide .control > div > div a.play {background-position: -108px -72px;}
+.slide .control > div > div a.pause {background-position: -108px -60px;} 
+.slide .control ul,
+.slide .control li { display: inline-block;} /*인라인 블록을 하게되고 줄내림을 하면 사이사이여백이 생김 여백을 주지않는 방법은 font-size를 0주기*/
+.slide .control li {padding: 0 3px;}
+.slide .control ul { font-size: 0; position: relative; top:-7px;} /*시작 ,일시정지박스 위치조정 */
+.slide .control li.on a{ background: #fff;}
+.slide .control li a{ display: block; width:50px; height: 3px; background: rgba(255,255,255,0.5); border: none;}
+.slide .control a { color: transparent;} /*컨트롤의 a태그 글씨를 투명!*/
+
+
+
+.visual .con > div { height: 640px;}
+.visual .con .slide { background: url(../images/bg_main00.jpg) no-repeat center; color: #fff; font-size: 25px;}
+.visual .con .slide span {font-size: 41px;}
+.visual .con .slide .text {position: absolute; left:33%; top:320px;}
+
+/*제품영역*/
+/*스프라이트 이미지를 사용하여 넣을때 최대한 타이트하게 잡고 이미지가 크기안에 들어가는지 체크하고 다들어갈수있는 가로세로 길이 대표 사이즈를 선택!*/
+/*64*52 사이즈*/
+
+.product a { display: block; color: #001829; font-size: 15px;}
+.product a:hover { color: #2d5b79; font-weight: bold;}
+.product a:before { content: ""; display: block; margin: 0 0 26px; width: 64px; height: 52px; background: url(../images/sp_com.png) no-repeat;}
+.product li {display: inline-block; text-align: center; padding: 0 55px;} /*블록요소가 일자로 쭉 정렬!*/
+.product ul { padding:46px 0 41px; text-align: center; font-size: 0;} /*li의 부모요소인 ul에 text-align :center를 주고 li를 inline-block으로 만들면 부모요소에따라 가운데 정렬도됌! 이때 float:left를 쓰면 안되는 이유는 float으로 가로사이즈도 주게되어 margin:0 auto 하면 가운데 정렬은 되나 새로운 요소를 추가하거나 빼면 모양이 변형되어 가운데 정렬이 안됨!*/
+.product li:nth-child(1) a:before { background-position: -3px -118px;}
+.product li:nth-child(2) a:before { background-position: -75px -118px;}
+.product li:nth-child(3) a:before { background-position: -148px -118px;}
+.product li:nth-child(4) a:before { background-position: -219px -118px;}
+.product li:nth-child(5) a:before { background-position: -292px -118px;}
+.product li:nth-child(6) a:before { background-position: -364px -118px;}
+.product li:nth-child(1) a:hover:before { background-position: -3px -184px;}
+.product li:nth-child(2) a:hover:before { background-position: -75px -184px;}
+.product li:nth-child(3) a:hover:before { background-position: -148px -184px;}
+.product li:nth-child(4) a:hover:before { background-position: -219px -184px;}
+.product li:nth-child(5) a:hover:before { background-position: -292px -184px;}
+.product li:nth-child(6) a:hover:before { background-position: -364px -184px;}
+
+/*한솔매거진 */
+.magazine { position: relative; height: 670px; background: #dfd9d1}
+.magazine h2 { padding: 50px 0 16px; font-size: 28px; color: #000; text-align: center; line-height: 100%;}
+.magazine p { text-align: center; font-size: 14px; color: #3a3b36; }
+.magazine .slide_box { width: 1180px; height: 430px;}
+.magazine .slide_box > div { position: absolute; left:50%; transform: translate(-50%,0); }
+.magazine .slide_box .left { overflow: hidden; position: relative; width:800px; height: 430px; float: left;}
+.magazine .slide_box .right {float: right; padding:20px 20px 0; width: 340px; height: 410px; background: #fff;}
+.magazine .slide_box .left img { width: 100%;}
+.magazine .slide_box .left div { position: absolute; padding: 0 20px; box-sizing: border-box; width: 200px; height: 100%; right: 0;top: 0; }
+.magazine .slide_box .left div a { position: absolute; right: 20px; bottom: 40px;  display: block; width: 160px; height: 45px;  font-size: 16px; color:transparent;
+text-align: center; line-height: 45px; }
+.magazine .slide_box .right li { padding: 0 0 20px;}
+.magazine .slide_box .right li a img { width: 80px; height: 80px; position: absolute; left: 0; top: 0;}
+.magazine .slide_box .right li a div {display: table-cell; vertical-align: middle; height: 82px; position: relative; display: block; padding:0 0 0 100px; font-size: 16px; color: #333; }
+.magazine .slide_box .right li a {display: table; width: 100%;}
+.magazine .slide_box .right li a strong { font-size: 13px; color: #000; display: block;}
+.magazine .slide_box .right li a div 
+
+
+
+
+
+
+
